@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react' 
-import './App.css';
+import './App.css'
+
+// components
+import HomeScreen from './components/HomeScreen.js'
+import QuizScreen from './components/QuizScreen.js'
 
 function App() {
-  const [ questions, setQuestions ] = useState({})
+  const [ questions, setQuestions ] = useState()
+  const [ started, setStarted ] = useState(false)
 
   useEffect(() => {
     const url = 'https://opentdb.com/api.php?amount=10'
@@ -12,14 +17,12 @@ function App() {
       .then(data => setQuestions(data.results))
   }, [])
 
-  console.log("questions:::::::::::", questions)
+  const startQuiz = () => setStarted(true)
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1> Quizbox Vision </h1>
-        <p> lets play a quiz game </p>
-        <button className='App-button'>start</button>
+        { !started ? <HomeScreen startQuiz={startQuiz} /> : <QuizScreen /> }
       </header>
     </div>
   );
