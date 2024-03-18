@@ -3,6 +3,7 @@ import QuestionContainer from './QuestionContainer'
 
 const QuizScreen = ({ questionsData }) => {
   const [answers, setAnswers] = useState([])
+  const [ questionNumber, setQuestionNumber] = useState(0)
 
   const unescapeHtml = data => {
     return data.replace(/&amp;/g, '&')
@@ -14,29 +15,36 @@ const QuizScreen = ({ questionsData }) => {
 
   useEffect(() => {
     const unsortedArraysOfAnswers = 
-    questionsData[0].incorrect_answers.map(ans => ({
-      answer: ans, correct: false
+    questionsData[questionNumber].incorrect_answers.map(ans => ({
+      answer: ans,
+      correct: false
     }))
     unsortedArraysOfAnswers.push({
-      answer: unescapeHtml(questionsData[0].correct_answer), correct: true
+      answer: unescapeHtml(questionsData[questionNumber].correct_answer),
+      correct: true
     })
 
     const sortedArraysOfAnswers = unsortedArraysOfAnswers.sort(
       () => Math.random() - .5
     ) 
     setAnswers(sortedArraysOfAnswers)
-  }, [questionsData])
+  }, [questionsData, questionNumber])
 
   const selectAnswer = answer => {
-    return answer.correct ? console.log("respuesta correcta") : console.log("respuesta incorrecta")
+    return answer.correct ?
+      console.log("respuesta correcta")
+    :
+      console.log("respuesta incorrecta")
   }
 
   return(
     <QuestionContainer
-      questionData={questionsData[0]}
+      questionsData={questionsData}
       answers={answers}
       selectAnswer={selectAnswer}
       unescapeHtml={unescapeHtml}
+      questionNumber={questionNumber}
+      setQuestionNumber={setQuestionNumber}
     />
   )
 }
