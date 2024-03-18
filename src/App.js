@@ -31,18 +31,19 @@ function App() {
 
   const startQuiz = () => setStarted(true)
 
-  // console.log("data::::::::::::::::", data)
-
   return (
     <div className="App">
       <header className="App-header">
         {
           loading ?
             <p>loading questions...</p>
+
           : error ?
             <p>{error}</p>
+
           : !started ?
             <HomeScreen startQuiz={startQuiz} />
+            
           :
             <QuizScreen questionsData={data}/>
           }
