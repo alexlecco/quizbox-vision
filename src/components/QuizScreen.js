@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import QuestionContainer from './QuestionContainer'
 
 const QuizScreen = ({questionsData}) => {
   const [answers, setAnswers] = useState([])
@@ -14,28 +15,12 @@ const QuizScreen = ({questionsData}) => {
     setAnswers(sortedArraysOfAnswers)
   }, [questionsData])
 
-  const unescapeHtml = data => {
-    return data.replace(/&amp;/g, '&')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&quot;/g, '"')
-        .replace(/&#039;/g, "'");
-  }
-
-  console.log("questionsData[0]::::::::::::", questionsData[0])
+  // console.log("questionsData[0]::::::::::::", questionsData[0])
 
   return(
-    <div className='App-container'>
-      <div className='questionFeatures'>
-        <p>category: {unescapeHtml(questionsData[0].category)}</p>
-        <p>difficulty: {questionsData[0].difficulty}</p>
-      </div>
-      <p>{unescapeHtml(questionsData[0].question)}</p>
-      <ul>
-        {answers.map(answer =>
-          <li className='answer'>{answer}</li>)}
-      </ul>
-    </div>
+    <QuestionContainer
+      questionData={questionsData[0]}
+      answers={answers} />
   )
 }
 
