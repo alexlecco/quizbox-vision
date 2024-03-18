@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import QuestionContainer from './QuestionContainer'
 
-const QuizScreen = ({ questionsData }) => {
+const QuizScreen = ({ questionsData, setIsCompleted }) => {
   const [answers, setAnswers] = useState([])
   const [ questionNumber, setQuestionNumber] = useState(0)
 
@@ -45,6 +45,7 @@ const QuizScreen = ({ questionsData }) => {
       unescapeHtml={unescapeHtml}
       questionNumber={questionNumber}
       setQuestionNumber={setQuestionNumber}
+      setIsCompleted={setIsCompleted}
     />
   )
 }

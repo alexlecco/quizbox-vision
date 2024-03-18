@@ -4,11 +4,13 @@ import './App.css'
 // components
 import HomeScreen from './components/HomeScreen.js'
 import QuizScreen from './components/QuizScreen.js'
+import ScoreScreen from './components/ScoreScreen.js'
 
 function App() {
   const [ data, setData ] = useState([])
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState(null)
+  const [ isCompleted, setIsCompleted ] = useState(false)
   const [ started, setStarted ] = useState(false)
 
   useEffect(() => {
@@ -31,7 +33,8 @@ function App() {
 
   const startQuiz = () => setStarted(true)
 
-  console.log("data:::::::::::::::::::", data)
+  // console.log("data:::::::::::::::::::", data)
+  // C&eacute;
 
   return (
     <div className="App">
@@ -43,11 +46,14 @@ function App() {
           : error ?
             <p>{error}</p>
 
+          : isCompleted ?
+            <ScoreScreen />
+
           : !started ?
             <HomeScreen startQuiz={startQuiz} />
             
           :
-            <QuizScreen questionsData={data}/>
+            <QuizScreen questionsData={data} setIsCompleted={setIsCompleted}/>
           }
       </header>
     </div>
