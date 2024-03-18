@@ -14,13 +14,22 @@ const QuizScreen = ({questionsData}) => {
     setAnswers(sortedArraysOfAnswers)
   }, [questionsData])
 
+  const unescapeHtml = data => {
+    return data.replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'");
+  }
+
   return(
-    <>
-      <h1>{questionsData[0].question}</h1>
+    <div className='App-container'>
+      <h1>{unescapeHtml(questionsData[0].question)}</h1>
       <ul>
-        {answers.map(answer => <p>{answer}</p>)}
+        {answers.map(answer =>
+          <li className='answer'>{answer}</li>)}
       </ul>
-    </>
+    </div>
   )
 }
 

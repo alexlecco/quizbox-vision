@@ -44,3 +44,16 @@
     transform: rotate(360deg);
   }
 }
+
+.App-container {
+  width: 60%;
+}
+
+.answer {
+  list-style-type: none;
+  background-color: #61dafb;
+  color: #282c34;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 50px;
+}
