@@ -1,4 +1,4 @@
-const QuestionContainer = ({ questionData, answers }) => {
+const QuestionContainer = ({ questionData, answers, selectAnswer, unescapeHtml }) => {
   return(
     <>
       <div className='App-container'>
@@ -6,13 +6,13 @@ const QuestionContainer = ({ questionData, answers }) => {
           <p>category: <br /> {questionData.category}</p>
           <p>difficulty: <br /> {questionData.difficulty}</p>
         </div>
-        <p>{questionData.question}</p>
+        <p>{unescapeHtml(questionData.question)}</p>
         <div className="answerContainer">
           {answers.map(answer =>
             <button
               key={answer.answer}
               className='answer'
-              onClick={() => console.log("presionado")}
+              onClick={() => selectAnswer(answer)}
             >
               {answer.answer}
             </button>)}
@@ -20,7 +20,6 @@ const QuestionContainer = ({ questionData, answers }) => {
       </div>
     </>
   )
-
 }
 
 export default QuestionContainer
