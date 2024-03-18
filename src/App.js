@@ -16,7 +16,7 @@ function App() {
   }, [])
 
   const fetchData = async () => {
-    const APIurl = 'https://opentdb.com/api.php?amount=10&category=15'
+    const APIurl = 'https://opentdb.com/api.php?amount=10'
     const response = await fetch(APIurl)
     const data = await response.json()
     const questions = data.results
@@ -31,10 +31,10 @@ function App() {
         {
           loading ?
             <p>loading questions...</p>
-          : started ?
-            <QuizScreen questionsData={data}/>
-          :
+          : !started ?
             <HomeScreen startQuiz={startQuiz} />
+          :
+            <QuizScreen questionsData={data}/>
           }
       </header>
     </div>

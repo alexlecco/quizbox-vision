@@ -22,9 +22,15 @@ const QuizScreen = ({questionsData}) => {
         .replace(/&#039;/g, "'");
   }
 
+  console.log("questionsData[0]::::::::::::", questionsData[0])
+
   return(
     <div className='App-container'>
-      <h1>{unescapeHtml(questionsData[0].question)}</h1>
+      <div className='questionFeatures'>
+        <p>category: {unescapeHtml(questionsData[0].category)}</p>
+        <p>difficulty: {questionsData[0].difficulty}</p>
+      </div>
+      <p>{unescapeHtml(questionsData[0].question)}</p>
       <ul>
         {answers.map(answer =>
           <li className='answer'>{answer}</li>)}
