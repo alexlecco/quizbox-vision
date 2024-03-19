@@ -13,7 +13,7 @@ function App() {
   const [ isCompleted, setIsCompleted ] = useState(false)
   const [ score, setScore ] = useState(0)
   const [ started, setStarted ] = useState(false)
-  const numberOfQuestions = 10
+  const numberOfQuestions = 2
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 5000)
@@ -35,6 +35,15 @@ function App() {
 
   const startQuiz = () => setStarted(true)
 
+  const restartQuiz = () => {
+    setStarted(false)
+    setIsCompleted(false)
+    setScore(0)
+    setLoading(true)
+    setTimeout(() => setLoading(false), 5000)
+    fetchData()
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -46,7 +55,10 @@ function App() {
             <p>{error}</p>
 
           : isCompleted ?
-            <ScoreScreen score={score} />
+            <ScoreScreen
+              score={score}
+              restartQuiz={restartQuiz}
+            />
 
           : !started ?
             <HomeScreen startQuiz={startQuiz} />
