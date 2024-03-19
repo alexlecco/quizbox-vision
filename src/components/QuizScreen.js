@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react'
+
+// libraries
+import {htmlUnescape} from 'escape-goat';
+
+// components
 import QuestionContainer from './QuestionContainer'
 
 const QuizScreen = ({
@@ -22,11 +27,11 @@ const QuizScreen = ({
   useEffect(() => {
     const unsortedArraysOfAnswers = 
     questionsData[questionNumber].incorrect_answers.map(ans => ({
-      answer: ans,
+      answer: htmlUnescape(ans),
       correct: false
     }))
     unsortedArraysOfAnswers.push({
-      answer: unescapeHtml(questionsData[questionNumber].correct_answer),
+      answer: htmlUnescape(questionsData[questionNumber].correct_answer),
       correct: true
     })
 

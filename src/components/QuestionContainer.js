@@ -1,12 +1,13 @@
+// libraries
+import { htmlUnescape } from 'escape-goat';
+
 const QuestionContainer = ({
   questionsData,
   answers,
   selectAnswer,
-  unescapeHtml,
   questionNumber,
   setQuestionNumber,
   setIsCompleted,
-  setScore,
   numberOfQuestions,
 }) => {
   const category = questionsData[questionNumber].category
@@ -22,11 +23,11 @@ const QuestionContainer = ({
     <>
       <div className='App-container'>
         <div className='questionFeatures'>
-          <p>category: <br /> {questionsData[questionNumber] && category}</p>
-          <p>difficulty: <br /> {questionsData[questionNumber] && difficulty}</p>
+          <p>category: <br /> {questionsData[questionNumber] && htmlUnescape(category)}</p>
+          <p>difficulty: <br /> {questionsData[questionNumber] && htmlUnescape(difficulty)}</p>
         </div>
         <p>{questionNumber + 1}/{numberOfQuestions}</p>
-        <p>{unescapeHtml(questionsData[questionNumber] && questionsData[questionNumber].question)}</p>
+        <p>{questionsData[questionNumber] && htmlUnescape(questionsData[questionNumber].question)}</p>
         <div className="answerContainer">
           {answers.map(answer =>
             <button
@@ -34,7 +35,7 @@ const QuestionContainer = ({
               className='answer'
               onClick={() => onHandleSelectAnswer(answer)}
             >
-              {unescapeHtml(answer.answer)}
+              {answer.answer}
             </button>)}
         </div>
       </div>

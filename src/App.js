@@ -13,7 +13,7 @@ function App() {
   const [ isCompleted, setIsCompleted ] = useState(false)
   const [ score, setScore ] = useState(0)
   const [ started, setStarted ] = useState(false)
-  const numberOfQuestions = 2
+  const numberOfQuestions = 10
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 5000)
