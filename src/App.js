@@ -11,7 +11,9 @@ function App() {
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState(null)
   const [ isCompleted, setIsCompleted ] = useState(false)
+  const [ score, setScore ] = useState(0)
   const [ started, setStarted ] = useState(false)
+  const numberOfQuestions = 10
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 5000)
@@ -20,7 +22,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const APIurl = 'https://opentdb.com/api.php?amount=10'
+      const APIurl = `https://opentdb.com/api.php?amount=${numberOfQuestions}`
       const response = await fetch(APIurl)
       const data = await response.json()
       const questions = data.results
@@ -33,9 +35,6 @@ function App() {
 
   const startQuiz = () => setStarted(true)
 
-  // console.log("data:::::::::::::::::::", data)
-  // C&eacute;
-
   return (
     <div className="App">
       <header className="App-header">
@@ -47,13 +46,19 @@ function App() {
             <p>{error}</p>
 
           : isCompleted ?
-            <ScoreScreen />
+            <ScoreScreen score={score} />
 
           : !started ?
             <HomeScreen startQuiz={startQuiz} />
             
           :
-            <QuizScreen questionsData={data} setIsCompleted={setIsCompleted}/>
+            <QuizScreen
+              questionsData={data}
+              setIsCompleted={setIsCompleted}
+              score={score}
+              setScore={setScore}
+              numberOfQuestions={numberOfQuestions}
+            />
           }
       </header>
     </div>

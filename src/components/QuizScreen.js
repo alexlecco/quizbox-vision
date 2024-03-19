@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react'
 import QuestionContainer from './QuestionContainer'
 
-const QuizScreen = ({ questionsData, setIsCompleted }) => {
+const QuizScreen = ({
+  questionsData,
+  setIsCompleted,
+  score,
+  setScore,
+  numberOfQuestions,
+}) => {
   const [answers, setAnswers] = useState([])
   const [ questionNumber, setQuestionNumber] = useState(0)
 
@@ -30,11 +36,13 @@ const QuizScreen = ({ questionsData, setIsCompleted }) => {
     setAnswers(sortedArraysOfAnswers)
   }, [questionsData, questionNumber])
 
-  const selectAnswer = answer => {
-    return answer.correct ?
-      console.log("respuesta correcta")
-    :
-      console.log("respuesta incorrecta")
+  const selectAnswer = (answer, type) => {
+    if (answer.correct) {
+      type === 'multiple' ?
+        setScore(score + 10)
+      :
+        setScore(score + 5)
+    }
   }
 
   return(
@@ -46,6 +54,8 @@ const QuizScreen = ({ questionsData, setIsCompleted }) => {
       questionNumber={questionNumber}
       setQuestionNumber={setQuestionNumber}
       setIsCompleted={setIsCompleted}
+      setScore={setScore}
+      numberOfQuestions={numberOfQuestions}
     />
   )
 }

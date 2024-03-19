@@ -1,4 +1,3 @@
-
 const QuestionContainer = ({
   questionsData,
   answers,
@@ -7,20 +6,26 @@ const QuestionContainer = ({
   questionNumber,
   setQuestionNumber,
   setIsCompleted,
+  setScore,
+  numberOfQuestions,
 }) => {
+  const category = questionsData[questionNumber].category
+  const difficulty = questionsData[questionNumber].difficulty
+  const type = questionsData[questionNumber].type
+
   const onHandleSelectAnswer = (answer) => {
-    questionNumber === 9 ? setIsCompleted(true) : setQuestionNumber(questionNumber + 1)
-    selectAnswer(answer)
+    questionNumber === numberOfQuestions - 1 ? setIsCompleted(true) : setQuestionNumber(questionNumber + 1)
+    selectAnswer(answer, type)
   }
 
   return(
     <>
       <div className='App-container'>
         <div className='questionFeatures'>
-          <p>category: <br /> {questionsData[questionNumber] && questionsData[questionNumber].category}</p>
-          <p>difficulty: <br /> {questionsData[questionNumber] && questionsData[questionNumber].difficulty}</p>
+          <p>category: <br /> {questionsData[questionNumber] && category}</p>
+          <p>difficulty: <br /> {questionsData[questionNumber] && difficulty}</p>
         </div>
-        <p>{questionNumber + 1}/10</p>
+        <p>{questionNumber + 1}/{numberOfQuestions}</p>
         <p>{unescapeHtml(questionsData[questionNumber] && questionsData[questionNumber].question)}</p>
         <div className="answerContainer">
           {answers.map(answer =>
