@@ -1,5 +1,6 @@
 # Quizbox Vision
 a quiz app created as a challenge for [Blackbox Vision](https://blackboxvision.com/)
+https://github.com/goncy/blackbox-vision-challenge
 
 ## Definición funcional
 El juego consiste en 10 preguntas las cuales pueden ser verdadero/falso o multiple choice.
